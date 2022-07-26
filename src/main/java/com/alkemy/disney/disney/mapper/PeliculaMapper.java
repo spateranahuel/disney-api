@@ -4,6 +4,9 @@ import com.alkemy.disney.disney.dto.PeliculaDTO;
 import com.alkemy.disney.disney.dto.PersonajeSinPeliculasDTO;
 import com.alkemy.disney.disney.entity.PeliculaEntity;
 import com.alkemy.disney.disney.entity.PersonajeEntity;
+import com.alkemy.disney.disney.repository.GeneroRepository;
+import com.alkemy.disney.disney.repository.PeliculaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -16,7 +19,8 @@ public class PeliculaMapper {
 
     //imagen titulo fechaCreacion calificacion generoId
 
-
+    @Autowired
+    GeneroRepository generoRepository;
 
     public PeliculaEntity peliculaDTO2Entity(PeliculaDTO dto){
         PeliculaEntity entity = new PeliculaEntity();
@@ -40,7 +44,7 @@ public class PeliculaMapper {
         dto.setFechaCreacion(entity.getFechaCreacion());
         dto.setCalificacion(entity.getCalificacion());
         dto.setGeneroId(entity.getGeneroId());
-        dto.setGeneroNombre(entity.getGenero().getNombre());
+        dto.setGeneroNombre(generoRepository.findById(entity.getGeneroId()).get().getNombre());
         dto.setPersonajes(this.personajeEntytySet2personajeSinPeliculasDTOSet(entity.getPersonajes()));
         return dto;
     }

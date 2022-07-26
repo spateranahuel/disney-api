@@ -21,9 +21,7 @@ public class PeliculaServiceImpl implements PeliculaService {
 
     @Override
     public PeliculaDTO save(PeliculaDTO dto) {
-        System.out.println(dto.toString());
         PeliculaEntity entity = peliculaMapper.peliculaDTO2Entity(dto);
-        System.out.println("\n\n"+entity.toString());
         PeliculaEntity entitySaved = peliculaRepository.save(entity);
         PeliculaDTO peliculaDTO = peliculaMapper.peliculaEntity2DTO(entitySaved);
         return peliculaDTO;
