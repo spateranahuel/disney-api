@@ -27,4 +27,10 @@ public class PeliculaController {
         return ResponseEntity.status(HttpStatus.FOUND).body(peliculaEncontrada);
     }
 
+    @PutMapping("/{idPelicula}/characters/{idCaracter}")
+    public ResponseEntity<Void> addPersonaje(@PathVariable Long idPelicula, @PathVariable Long idCaracter){
+        this.peliculaService.addPersonaje(idPelicula,idCaracter);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
 }

@@ -7,4 +7,6 @@ public interface PeliculaService {
     public PeliculaDTO save(PeliculaDTO dto);
 
     PeliculaDTO getPelicula(Long id);
+
+    void addPersonaje(Long idPelicula, Long idPersonaje);
 }
