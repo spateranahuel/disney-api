@@ -45,4 +45,19 @@ public class PersonajeServiceImpl implements PersonajeService {
     public void delete(Long id) {
         this.personajeRepository.deleteById(id);
     }
+
+    @Override
+    public PersonajeDTO update(PersonajeSinPeliculasDTO dto, Long id) {
+        PersonajeEntity entity = personajeRepository.findById(id).get();
+
+        entity.setEdad(dto.getEdad());
+        entity.setImagen(dto.getImagen());
+        entity.setHistoria(dto.getHistoria());
+        entity.setPeso(dto.getPeso());
+        entity.setNombre(dto.getNombre());
+        
+        PersonajeEntity entitySaved = personajeRepository.save(entity);
+        PersonajeDTO personajeDTO = personajeMapper.personajeEntity2personajeDTO(entitySaved);
+        return personajeDTO;
+    }
 }

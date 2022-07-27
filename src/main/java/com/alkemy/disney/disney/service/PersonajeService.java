@@ -12,4 +12,6 @@ public interface PersonajeService {
     PersonajeDTO getPersonaje(Long id);
 
     void delete(Long id);
+
+    PersonajeDTO update(PersonajeSinPeliculasDTO dto, Long id);
 }
