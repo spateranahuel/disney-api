@@ -55,7 +55,7 @@ public class PersonajeServiceImpl implements PersonajeService {
         entity.setHistoria(dto.getHistoria());
         entity.setPeso(dto.getPeso());
         entity.setNombre(dto.getNombre());
-        
+
         PersonajeEntity entitySaved = personajeRepository.save(entity);
         PersonajeDTO personajeDTO = personajeMapper.personajeEntity2personajeDTO(entitySaved);
         return personajeDTO;

@@ -1,6 +1,7 @@
 package com.alkemy.disney.disney.controller;
 
 import com.alkemy.disney.disney.dto.PeliculaDTO;
+import com.alkemy.disney.disney.dto.PeliculaSinPersonajesDTO;
 import com.alkemy.disney.disney.service.PeliculaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,12 @@ public class PeliculaController {
     public ResponseEntity<Void> addPersonaje(@PathVariable Long idPelicula, @PathVariable Long idCaracter){
         this.peliculaService.addPersonaje(idPelicula,idCaracter);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
+    @PutMapping("/{idPelicula}")
+    public ResponseEntity<PeliculaDTO> update(@RequestBody PeliculaSinPersonajesDTO dto, @PathVariable Long idPelicula){
+        PeliculaDTO peliculaDTO = peliculaService.update(dto,idPelicula);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(peliculaDTO);
     }
 
 }

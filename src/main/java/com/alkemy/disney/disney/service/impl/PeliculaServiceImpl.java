@@ -1,6 +1,7 @@
 package com.alkemy.disney.disney.service.impl;
 
 import com.alkemy.disney.disney.dto.PeliculaDTO;
+import com.alkemy.disney.disney.dto.PeliculaSinPersonajesDTO;
 import com.alkemy.disney.disney.entity.PeliculaEntity;
 import com.alkemy.disney.disney.entity.PersonajeEntity;
 import com.alkemy.disney.disney.mapper.PeliculaMapper;
@@ -53,6 +54,19 @@ public class PeliculaServiceImpl implements PeliculaService {
         peliculaEntity.getPersonajes().add(personajeEntity);
         peliculaRepository.save(peliculaEntity);
 
+    }
+
+    @Override
+    public PeliculaDTO update(PeliculaSinPersonajesDTO dto, Long idPelicula) {
+        PeliculaEntity entity = peliculaRepository.findById(idPelicula).get();
+        entity.setImagen(dto.getImagen());
+        entity.setTitulo(dto.getTitulo());
+        entity.setFechaCreacion(dto.getFechaCreacion());
+        entity.setCalificacion(dto.getCalificacion());
+        entity.setGeneroId(dto.getGeneroId());
+        PeliculaEntity entitySaved = peliculaRepository.save(entity);
+        PeliculaDTO peliculaDTO = peliculaMapper.peliculaEntity2DTO(entitySaved);
+        return peliculaDTO;
     }
 
 }
