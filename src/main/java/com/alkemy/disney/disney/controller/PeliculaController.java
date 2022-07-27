@@ -34,10 +34,23 @@ public class PeliculaController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
+
+
+    @DeleteMapping("/{idPelicula}/characters/{idCaracter}")
+    public  ResponseEntity<Void> deletePersonaje(@PathVariable Long idPelicula, @PathVariable Long idCaracter){
+        this.peliculaService.removePersonaje(idPelicula,idCaracter);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
+
+
+
     @PutMapping("/{idPelicula}")
     public ResponseEntity<PeliculaDTO> update(@RequestBody PeliculaSinPersonajesDTO dto, @PathVariable Long idPelicula){
         PeliculaDTO peliculaDTO = peliculaService.update(dto,idPelicula);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(peliculaDTO);
     }
+
+
 
 }

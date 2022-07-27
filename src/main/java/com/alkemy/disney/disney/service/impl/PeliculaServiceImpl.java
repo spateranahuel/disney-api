@@ -56,6 +56,24 @@ public class PeliculaServiceImpl implements PeliculaService {
 
     }
 
+
+
+    @Override
+    public void removePersonaje(Long idPelicula, Long idPersonaje) {
+        Optional<PersonajeEntity> personajeEntityOptional = personajeRepository.findById(idPersonaje);
+        Optional<PeliculaEntity> peliculaEntityOptional = peliculaRepository.findById(idPelicula);
+
+        PersonajeEntity personajeEntity = personajeEntityOptional.get();
+        PeliculaEntity peliculaEntity = peliculaEntityOptional.get();
+
+        peliculaEntity.getPersonajes().remove(personajeEntity);
+        peliculaRepository.save(peliculaEntity);
+
+    }
+
+
+
+
     @Override
     public PeliculaDTO update(PeliculaSinPersonajesDTO dto, Long idPelicula) {
         PeliculaEntity entity = peliculaRepository.findById(idPelicula).get();
@@ -68,6 +86,8 @@ public class PeliculaServiceImpl implements PeliculaService {
         PeliculaDTO peliculaDTO = peliculaMapper.peliculaEntity2DTO(entitySaved);
         return peliculaDTO;
     }
+
+
 
 }
 
