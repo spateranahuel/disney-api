@@ -13,7 +13,7 @@ public class PersonajeDTO{
     private Long id;
     private String imagen;
     private String nombre;
-    private int edad;
+    private Long edad;
     private double peso;
     private String historia;
     Set<PeliculaSinPersonajesDTO>  peliculas  = new HashSet<>();

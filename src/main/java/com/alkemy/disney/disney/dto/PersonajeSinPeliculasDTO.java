@@ -10,7 +10,7 @@ public class PersonajeSinPeliculasDTO {
     private Long id;
     private String imagen;
     private String nombre;
-    private int edad;
+    private Long edad;
     private double peso;
     private String historia;
 }
