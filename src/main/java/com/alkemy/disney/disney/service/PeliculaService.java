@@ -1,7 +1,10 @@
 package com.alkemy.disney.disney.service;
 
+import com.alkemy.disney.disney.dto.PeliculaBusquedaDTO;
 import com.alkemy.disney.disney.dto.PeliculaDTO;
 import com.alkemy.disney.disney.dto.PeliculaSinPersonajesDTO;
+
+import java.util.List;
 
 public interface PeliculaService {
 
@@ -14,4 +17,6 @@ public interface PeliculaService {
     PeliculaDTO update(PeliculaSinPersonajesDTO dto, Long idPelicula);
 
     void removePersonaje(Long idPelicula, Long idCaracter);
+
+    List<PeliculaBusquedaDTO> getByFilters(String name, Long genero, String order);
 }

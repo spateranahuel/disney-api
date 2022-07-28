@@ -1,16 +1,17 @@
 package com.alkemy.disney.disney.service.impl;
 
-import com.alkemy.disney.disney.dto.PeliculaDTO;
-import com.alkemy.disney.disney.dto.PeliculaSinPersonajesDTO;
+import com.alkemy.disney.disney.dto.*;
 import com.alkemy.disney.disney.entity.PeliculaEntity;
 import com.alkemy.disney.disney.entity.PersonajeEntity;
 import com.alkemy.disney.disney.mapper.PeliculaMapper;
 import com.alkemy.disney.disney.repository.PeliculaRepository;
 import com.alkemy.disney.disney.repository.PersonajeRepository;
+import com.alkemy.disney.disney.repository.Specification.PeliculaSpecification;
 import com.alkemy.disney.disney.service.PeliculaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,6 +24,9 @@ public class PeliculaServiceImpl implements PeliculaService {
     PeliculaRepository peliculaRepository;
     @Autowired
     PersonajeRepository personajeRepository;
+
+    @Autowired
+    PeliculaSpecification peliculaSpecification;
 
     @Override
     public PeliculaDTO save(PeliculaDTO dto) {
@@ -71,7 +75,13 @@ public class PeliculaServiceImpl implements PeliculaService {
 
     }
 
-
+    @Override
+    public List<PeliculaBusquedaDTO> getByFilters(String name, Long idGenero, String order) {
+        PeliculaFiltersDTO filtersDto = new PeliculaFiltersDTO(name,idGenero,order);
+        List<PeliculaEntity> entities = peliculaRepository.findAll(peliculaSpecification.getByFilters(filtersDto));
+        List<PeliculaBusquedaDTO> dtos = peliculaMapper.peliculaEntityList2peliculaBusquedaDTOList(entities);
+        return dtos;
+    }
 
 
     @Override
@@ -81,7 +91,7 @@ public class PeliculaServiceImpl implements PeliculaService {
         entity.setTitulo(dto.getTitulo());
         entity.setFechaCreacion(dto.getFechaCreacion());
         entity.setCalificacion(dto.getCalificacion());
-        entity.setGeneroId(dto.getGeneroId());
+        entity.setIdGenero(dto.getGeneroId());
         PeliculaEntity entitySaved = peliculaRepository.save(entity);
         PeliculaDTO peliculaDTO = peliculaMapper.peliculaEntity2DTO(entitySaved);
         return peliculaDTO;

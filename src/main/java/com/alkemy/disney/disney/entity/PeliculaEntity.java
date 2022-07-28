@@ -7,9 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -42,7 +40,7 @@ public class PeliculaEntity {
     private GeneroEntity genero;
 
     @Column(name = "genero_id",nullable = false)
-    private Long generoId;
+    private Long idGenero;
 
 
 

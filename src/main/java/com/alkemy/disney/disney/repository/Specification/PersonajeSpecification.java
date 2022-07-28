@@ -54,3 +54,6 @@ public class PersonajeSpecification {
     }
 }
 
+
+
+
