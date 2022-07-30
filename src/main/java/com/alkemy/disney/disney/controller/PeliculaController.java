@@ -33,17 +33,17 @@ public class PeliculaController {
         return ResponseEntity.status(HttpStatus.FOUND).body(peliculaEncontrada);
     }
 
-    @PutMapping("/{idPelicula}/characters/{idCaracter}")
-    public ResponseEntity<Void> addPersonaje(@PathVariable Long idPelicula, @PathVariable Long idCaracter){
-        this.peliculaService.addPersonaje(idPelicula,idCaracter);
+    @PutMapping("/{idMovie}/characters/{idCharacter}")
+    public ResponseEntity<Void> addPersonaje(@PathVariable Long idMovie, @PathVariable Long idCharacter){
+        this.peliculaService.addPersonaje(idMovie,idCharacter);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
 
 
-    @DeleteMapping("/{idPelicula}/characters/{idCaracter}")
-    public  ResponseEntity<Void> deletePersonaje(@PathVariable Long idPelicula, @PathVariable Long idCaracter){
-        this.peliculaService.removePersonaje(idPelicula,idCaracter);
+    @DeleteMapping("{idMovie}/characters/{idCaracter}")
+    public  ResponseEntity<Void> deletePersonaje(@PathVariable Long idMovie, @PathVariable Long idCaracter){
+        this.peliculaService.removePersonaje(idMovie,idCaracter);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
@@ -57,7 +57,7 @@ public class PeliculaController {
     }
 
 
-    @GetMapping
+    @GetMapping("/movies")
     public ResponseEntity<List<PeliculaBusquedaDTO>> getDetailsByFilters(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) Long genero,
@@ -67,6 +67,10 @@ public class PeliculaController {
         return ResponseEntity.ok(peliculas);
     }
 
-
+    @DeleteMapping("/{idPelicula}")
+    public ResponseEntity<Void> delete(@PathVariable Long idPelicula){
+        this.peliculaService.delete(idPelicula);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 
 }

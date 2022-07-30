@@ -22,6 +22,4 @@ public class GeneroEntity {
 
     private String imagen;
 
-
-    //private PeliculaEntity peliculas;
 }

@@ -1,0 +1,131 @@
+package programa.pkg2.cumpleaños;
+
+import java.util.Scanner;
+
+
+public class Programa2Cumpleaños {
+
+  
+    public static void main(String[] args) {
+        
+        Scanner sc = new Scanner(System.in);
+        int dia,mes,año,cantPersonas,i;
+	int contVeranoAdulto, contInviernoAdulto,contOtoñoAdulto,contPrimavera;
+	double porcEstacionMaxima;
+        
+        int diaActual,mesActual,añoActual;
+        
+        diaActual=29;
+        mesActual=7;
+        añoActual=2022;
+        
+	contVeranoAdulto=contInviernoAdulto=contOtoñoAdulto=contPrimavera=0;
+
+        
+        System.out.print("Ingrese la cantidad de personas a encuestar: ");
+        cantPersonas = sc.nextInt();
+        
+        for(i=1;i<=cantPersonas;i++){
+            System.out.println("----- Ingrese su fecha de nacimiento -----");
+            System.out.print("Dia: ");
+            dia = sc.nextInt(); 
+
+            System.out.print("Mes: ");
+            mes = sc.nextInt(); 
+
+            System.out.print("Año: ");
+            año = sc.nextInt(); 
+            
+            if(año<añoActual-18 || (año==añoActual-18 && mes<mesActual) || (año==añoActual-18 && mes==mesActual && dia<=diaActual) ){
+               
+		
+		if(mes==12 && dia>=21 || mes==1 || mes==2 || mes==3 && dia<=20 ){
+			contVeranoAdulto = contVeranoAdulto + 1;
+		}
+		else if(mes==3 && dia>=21 || mes==4 || mes==5 || mes==6 && dia<=20 ){
+			contotoñoAdulto = contOtoñoAdulto + 1;
+		}
+		else if(mes==6 && dia>=21 || mes==7 || mes==8 || mes==9 && dia<=20 ){
+			contInviernoAdulto = contInviernoAdulto + 1;
+		}
+		else if(mes==12 && dia>=21 || mes==1 || mes==2 || mes==3 && dia<=20 ){
+			contPrimaveraAdulto = contPrimaveraAdulto + 1;
+		}
+
+            }
+           
+            System.out.println("---------------------------------------------------------------\n");
+        }
+
+
+	
+		
+	
+      //CALCULAMOS LA ESTACION MAXIMA
+
+	
+	String estacionMaxima;
+	int contMaximo;
+
+       if(contVeranoAdulto>=contOtoñoAdulto && 	contVeranoAdulto>=contInviernoAdulto && contVeranoAdulto>=contPrimaveraAdulto){
+	   	contMaximo=contVerano;
+		estacionMaxima="verano";
+       }
+       else if(contOtoñoAdulto>=contVeranoAdulto && contOtoñoAdulto>=contInviernoAdulto && contOtoñoAdulto>=contPrimaveraAdulto){
+		contMaximo=contOtoñoAdulto;
+		estacionMaxima="otoño";
+       }
+	else if(....){
+		....
+		...
+	}
+	else{
+		....
+		....
+	}	
+
+
+	porcEstacionMaxima=contMaximo*100/(contVeranoAdulto+ contInviernoAdulto+contOtoñoAdulto+contPrimavera);
+  	System.out.println("La estacion en la que mas adultos cumplen años es "+estacionMaxima+" y representa el %"+porcEstacionMaxima); 
+
+          
+    } 
+    
+}
+
+
+
+
+ a) Adultos: 5 adultos cumplen en Verano, 2 en otoño, 7 en invierno, 4 en primavera.
+La estacion en la que mas personas adultas cumplieron años es en invierno y corresponde a un %38,88
+
+
+COMO CALCULAR UN PORCENTAJE
+ 
+	18 adultos -----------> 100%
+      	7 adultos  -----------> X= 7*100/18 = %38,88
+
+
+/*
+    V                    O                 I                    P 	
+21 diciembre  -----> 21 de marzo -----> 21 de junio ------>21  de septiembre
+
+El gobierno de la Republica Argentina desea implementar un sistema para recolectar datos correspondientes a la estacion del año
+donde cumplen años mas personas.
+
+El sistema se colocara en una plaza (parecido al del Mundial de Qatar) y se solicitaran los datos 
+necesarios para saber en que estacion del año cumple dicha persona.
+
+El programa debe informar cual es el porcentaje de personas adultas que cumplen en la estacion que mas cumpleaños tiene y 
+tambien debe informar el promedio de edad de las personas menores que cumplen en la estacion que menos cumpleaños tiene.
+
+Ejemplo: Se registro que:
+
+ a) Adultos: 5 adultos cumplen en Verano, 2 en otoño, 7 en invierno, 4 en primavera.
+La estacion en la que mas personas adultas cumplieron años es en invierno y corresponde a un %38,8
+
+ b) Menores: 4 menores cumplen en Verano, 2 en otoño (uno con 13 años y otro con 17) , 3 en invierno, 6 en primavera.
+La estacion en la que menos menores cumplieron años es otoño. La edad promedio es 15,5.
+
+Nota: Considerar que el maximo y el minimo es unico. 
+*/

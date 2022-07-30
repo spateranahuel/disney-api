@@ -4,8 +4,10 @@ import com.alkemy.disney.disney.dto.PersonajeBusquedaDTO;
 import com.alkemy.disney.disney.dto.PersonajeDTO;
 import com.alkemy.disney.disney.dto.PersonajeFiltersDto;
 import com.alkemy.disney.disney.dto.PersonajeSinPeliculasDTO;
+import com.alkemy.disney.disney.entity.PeliculaEntity;
 import com.alkemy.disney.disney.entity.PersonajeEntity;
 import com.alkemy.disney.disney.mapper.PersonajeMapper;
+import com.alkemy.disney.disney.repository.PeliculaRepository;
 import com.alkemy.disney.disney.repository.PersonajeRepository;
 import com.alkemy.disney.disney.repository.Specification.PersonajeSpecification;
 import com.alkemy.disney.disney.service.PersonajeService;
@@ -29,6 +31,7 @@ public class PersonajeServiceImpl implements PersonajeService {
 
     @Autowired
     private PersonajeSpecification personajeSpecification;
+    private PeliculaRepository peliculaRepository;
 
     @Override
     public PersonajeSinPeliculasDTO save(PersonajeSinPeliculasDTO personajeBasicDTO) {
@@ -51,7 +54,9 @@ public class PersonajeServiceImpl implements PersonajeService {
 
     @Override
     public void delete(Long id) {
+
         this.personajeRepository.deleteById(id);
+
     }
 
     @Override

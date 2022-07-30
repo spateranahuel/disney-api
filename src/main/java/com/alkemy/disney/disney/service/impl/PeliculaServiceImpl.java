@@ -83,6 +83,11 @@ public class PeliculaServiceImpl implements PeliculaService {
         return dtos;
     }
 
+    @Override
+    public void delete(Long idPelicula) {
+        this.peliculaRepository.deleteById(idPelicula);
+    }
+
 
     @Override
     public PeliculaDTO update(PeliculaSinPersonajesDTO dto, Long idPelicula) {

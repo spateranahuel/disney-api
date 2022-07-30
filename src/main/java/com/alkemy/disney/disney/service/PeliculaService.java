@@ -19,4 +19,6 @@ public interface PeliculaService {
     void removePersonaje(Long idPelicula, Long idCaracter);
 
     List<PeliculaBusquedaDTO> getByFilters(String name, Long genero, String order);
+
+    void delete(Long idPelicula);
 }
