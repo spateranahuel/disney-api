@@ -17,7 +17,7 @@ import java.util.Set;
 @Getter
 @Setter
 
-@SQLDelete(sql = "UPDATE personaje SET deleted= true WHERE id=?")
+@SQLDelete(sql = "UPDATE pelicula SET deleted= true WHERE id=?")
 @Where(clause = "deleted=false")
 public class PeliculaEntity {
 
@@ -25,7 +25,6 @@ public class PeliculaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-
 
     private String imagen;
 
@@ -38,7 +37,7 @@ public class PeliculaEntity {
     private Byte calificacion;
     private boolean deleted = Boolean.FALSE;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER) //cascade = CascadeType.ALL
     @JoinColumn(name = "genero_id",insertable = false,updatable = false)
     private GeneroEntity genero;
 

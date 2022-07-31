@@ -10,6 +10,7 @@ import com.alkemy.disney.disney.mapper.PersonajeMapper;
 import com.alkemy.disney.disney.repository.PeliculaRepository;
 import com.alkemy.disney.disney.repository.PersonajeRepository;
 import com.alkemy.disney.disney.repository.Specification.PersonajeSpecification;
+import com.alkemy.disney.disney.service.PeliculaService;
 import com.alkemy.disney.disney.service.PersonajeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,9 @@ public class PersonajeServiceImpl implements PersonajeService {
     private PersonajeSpecification personajeSpecification;
     private PeliculaRepository peliculaRepository;
 
+    @Autowired
+    private PeliculaService peliculaService;
+
     @Override
     public PersonajeSinPeliculasDTO save(PersonajeSinPeliculasDTO personajeBasicDTO) {
         PersonajeEntity entity = personajeMapper.personajeSinPeliculasDTO2personajeEntity(personajeBasicDTO);
@@ -53,10 +57,15 @@ public class PersonajeServiceImpl implements PersonajeService {
     }
 
     @Override
-    public void delete(Long id) {
-
-        this.personajeRepository.deleteById(id);
-
+    public void delete(Long idPersonaje) {
+        PersonajeEntity personajeEntity = personajeRepository.findById(idPersonaje).get();
+        Set<PeliculaEntity> peliculaEntitySet = personajeEntity.getPeliculas();
+        for (PeliculaEntity peliculaEntity:peliculaEntitySet) {
+            this.peliculaService.removePersonaje(peliculaEntity.getId(),idPersonaje);
+        }
+        personajeEntity.getPeliculas().clear();
+        this.personajeRepository.save(personajeEntity);
+        this.personajeRepository.deleteById(idPersonaje);
     }
 
     @Override

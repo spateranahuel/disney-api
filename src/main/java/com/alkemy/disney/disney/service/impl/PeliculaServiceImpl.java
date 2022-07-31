@@ -63,7 +63,7 @@ public class PeliculaServiceImpl implements PeliculaService {
 
 
     @Override
-    public void removePersonaje(Long idPelicula, Long idPersonaje) {
+    public void removePersonaje(Long idPelicula, Long idPersonaje){
         Optional<PersonajeEntity> personajeEntityOptional = personajeRepository.findById(idPersonaje);
         Optional<PeliculaEntity> peliculaEntityOptional = peliculaRepository.findById(idPelicula);
 
